@@ -1,0 +1,6 @@
+{
+    "channel_id": "forwardtestchannel",
+    "telegram_api_key": "abc123",
+    "webhook_url": "https://example.com/webhook",
+    "webhook_port": 88
+}
