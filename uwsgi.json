@@ -1,0 +1,6 @@
+{"uwsgi": {
+    "socket": ["/tmp/mp3_bot.sock"],
+    "chmod-socket": 664,
+    "manage-script-name": true,
+    "mount": "/=bot:app"
+}}
