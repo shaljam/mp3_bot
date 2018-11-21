@@ -1,4 +1,9 @@
 pytz
 Flask
-telepot
 ujson
+telepot
+fake_useragent==0.1.11
+humanize
+requests
+beautifulsoup4
+lxml
