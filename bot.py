@@ -114,7 +114,7 @@ def on_chosen_inline_result(msg):
 
 TOKEN = config[c_telegram_api_key]
 PORT = config[c_webhook_port]
-URL = config[c_webhook_url]
+URL = f'{config[c_webhook_url]}/{TOKEN}'
 
 app = Flask(__name__)
 bot = telepot.Bot(TOKEN)
@@ -124,7 +124,7 @@ webhook = OrderedWebhook(bot, {'chat': on_chat_message,
                                'chosen_inline_result': on_chosen_inline_result})
 
 
-@app.route(f'/{TOKEN}', methods=['GET', 'POST'])
+@app.route(f'/webhook/{TOKEN}', methods=['GET', 'POST'])
 def pass_update():
     webhook.feed(request.data)
     return 'OK'
