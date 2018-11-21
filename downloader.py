@@ -77,7 +77,7 @@ class Mp3Downloader:
         if content_length_header in response_headers:
             length = int(response_headers[content_length_header])
 
-        file_name = 'downloads/' + file_name
+        file_name = 'downloaded_mp3s/' + file_name
         print('{}: saving to {}'.format(datetime.now(), file_name))
 
         downloaded = 0
