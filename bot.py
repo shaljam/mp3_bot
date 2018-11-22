@@ -34,14 +34,20 @@ def on_chat_message(msg):
         if text.startswith('/get'):
             try:
                 link = text[len('/get_'):]
+
+                if not link or len(link) > 150:
+                    bot.sendMessage(chat_id, '🤨️')
+                    return
+
                 link = link + '=' * (len(link) % 4)
-                link = base64.b64decode(link.encode('utf-8')).decode()
+                link = base64.b64decode(link.encode('utf-8')).decode('utf-8')
 
                 print(f'get {link}')
 
                 mdl = Mp3Downloader()
                 dl_path = mdl.download_radio_javan(link)
 
+                print(f'sending {dl_path} to telegram ...')
                 bot.sendAudio(chat_id, open(dl_path, 'rb'))
 
             except ValueError:
@@ -52,6 +58,10 @@ def on_chat_message(msg):
         elif text.startswith('/search'):
             try:
                 query = text[len('/search_'):]
+
+                if not query or len(query) > 50:
+                    bot.sendMessage(chat_id, 'bad query 😕️')
+                    return
 
                 print(f'search {query}')
 
@@ -65,7 +75,7 @@ def on_chat_message(msg):
                 msg = ''
                 for name, link in results[:min(len(results), 10)]:
                     link = base64.b64encode(link.encode('utf-8')).decode('utf-8').replace('=', '')
-                    msg += f'{name}: /get_{link}\n'
+                    msg += f'{name}:\n /get_{link}\n\n'
 
                 bot.sendMessage(chat_id, msg)
 
