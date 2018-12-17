@@ -55,9 +55,9 @@ def on_chat_message(msg):
 
             except KeyError:
                 print('Invalid key, no corresponding User ID')
-        elif text.startswith('/search'):
+        else:
             try:
-                query = text[len('/search_'):]
+                query = text
 
                 if not query or len(query) > 50:
                     bot.sendMessage(chat_id, 'bad query 😕️')
